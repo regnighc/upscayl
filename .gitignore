@@ -19,6 +19,7 @@ out/
 /dist/
 /export/electron
 /export/common
+/export/server
 
 # misc
 .DS_Store
