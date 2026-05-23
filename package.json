@@ -68,7 +68,9 @@
     "dist:appstore": "CSC_KEY_PASSWORD=$PASSWORD CSC_LINK=$(openssl base64 -in $CERTIFICATE_PATH) npm run dist:mac-mas",
     "enable-store": "sed -i '' -e 's/APP_STORE_BUILD: false,/APP_STORE_BUILD: true,/' common/feature-flags.ts",
     "disable-store": "sed -i '' -e 's/APP_STORE_BUILD: true,/APP_STORE_BUILD: false,/' common/feature-flags.ts",
-    "validate-schema": "node scripts/validate-schema.js"
+    "validate-schema": "node scripts/validate-schema.js",
+    "web:build": "tsc && next build renderer",
+    "web:serve": "node export/server/index.js"
   },
   "build": {
     "productName": "Upscayl",
@@ -206,9 +208,13 @@
   "devDependencies": {
     "@electron/notarize": "^2.5.0",
     "@tailwindcss/typography": "^0.5.15",
+    "@types/express": "^4.17.25",
+    "@types/multer": "^1.4.13",
     "@types/node": "^18.15.12",
     "@types/react": "^18.0.37",
     "@types/react-dom": "^18.0.11",
+    "@types/uuid": "^9.0.8",
+    "@types/ws": "^8.18.1",
     "ajv": "^6.12.6",
     "autoprefixer": "^10.4.20",
     "cross-env": "^7.0.3",
@@ -241,10 +247,12 @@
     "electron-updater": "^6.3.9",
     "eslint-config-next": "^14.2.7",
     "exiftool-vendored": "^29.3.0",
+    "express": "^4.22.2",
     "firebase": "^11.1.0",
     "gray-matter": "^4.0.3",
     "jotai": "^2.11.0",
     "lucide-react": "^0.469.0",
+    "multer": "^1.4.5-lts.1",
     "posthog-js": "^1.203.2",
     "react-compare-slider": "^3.1.0",
     "react-markdown": "^9.0.1",
@@ -255,7 +263,9 @@
     "tailwind-merge": "^2.6.0",
     "tailwind-scrollbar": "^3.1.0",
     "tailwindcss-animate": "^1.0.7",
-    "theme-change": "^2.5.0"
+    "theme-change": "^2.5.0",
+    "uuid": "^9.0.1",
+    "ws": "^8.21.0"
   },
   "volta": {
     "node": "18.20.5"

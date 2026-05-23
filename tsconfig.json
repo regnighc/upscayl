@@ -19,6 +19,7 @@
     "./electron/**/*",
     "./common/**/*",
     "./renderer/**/*",
+    "./server/**/*",
     "scripts/generate-schema.js",
     "scripts/validate-schema.js"
   ],

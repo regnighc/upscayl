@@ -7,6 +7,14 @@ import { Toaster } from "@/components/ui/toaster";
 import { Tooltip } from "react-tooltip";
 import PostHogProviderWrapper from "@/components/posthog-provider-wrapper";
 
+// In a plain browser (Docker web build) window.electron doesn't exist.
+// Inject the HTTP/WebSocket shim before any component mounts.
+if (typeof window !== "undefined" && !(window as any).electron) {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const { createWebElectronShim } = require("../lib/web-electron-shim");
+  (window as any).electron = createWebElectronShim();
+}
+
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <>

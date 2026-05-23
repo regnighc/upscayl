@@ -1,0 +1,29 @@
+services:
+  upscayl:
+    build: .
+    image: upscayl-web
+    ports:
+      - "3000:3000"
+    # Pass the Intel iGPU render node into the container so upscayl-bin can
+    # use Vulkan via the Mesa ANV driver.  The host kernel must have i915
+    # loaded (standard on most Linux distros with 8th-gen+ Intel CPUs).
+    devices:
+      - /dev/dri:/dev/dri
+    group_add:
+      - video
+    environment:
+      - PORT=3000
+      # Override these to use custom paths inside the container:
+      # - UPSCAYL_BIN_PATH=/app/resources/linux/bin/upscayl-bin
+      # - UPSCAYL_MODELS_PATH=/app/resources/models
+      # - UPSCAYL_TEMP_DIR=/tmp/upscayl-web
+      #
+      # To force CPU-only mode (no GPU), set gpuId to -1 in the UI
+      # or set the default here via an env var consumed by the UI.
+    restart: unless-stopped
+    # Uncomment to persist processed files across container restarts:
+    # volumes:
+    #   - upscayl-temp:/tmp/upscayl-web
+
+# volumes:
+#   upscayl-temp:

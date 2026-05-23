@@ -7,9 +7,14 @@ const ImageViewer = ({
   imagePath: string;
   setDimensions: (dimensions: { width: number; height: number }) => void;
 }) => {
+  const src =
+    imagePath.startsWith("/") || imagePath.startsWith("http")
+      ? imagePath
+      : "file:///" + sanitizePath(imagePath);
+
   return (
     <img
-      src={"file:///" + sanitizePath(imagePath)}
+      src={src}
       onLoad={(e: React.SyntheticEvent<HTMLImageElement>) => {
         setDimensions({
           width: e.currentTarget.naturalWidth,

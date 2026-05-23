@@ -32,7 +32,7 @@ const SliderView = ({
 
           <img
             /* USE REGEX TO GET THE FILENAME AND ENCODE IT INTO PROPER FORM IN ORDER TO AVOID ERRORS DUE TO SPECIAL CHARACTERS */
-            src={"file:///" + sanitizedImagePath}
+            src={sanitizedImagePath.startsWith("/") || sanitizedImagePath.startsWith("http") ? sanitizedImagePath : "file:///" + sanitizedImagePath}
             alt={t("APP.SLIDER.ORIGINAL_TITLE")}
             onMouseMove={handleMouseMove}
             style={{
@@ -51,7 +51,7 @@ const SliderView = ({
           </p>
           <img
             /* USE REGEX TO GET THE FILENAME AND ENCODE IT INTO PROPER FORM IN ORDER TO AVOID ERRORS DUE TO SPECIAL CHARACTERS */
-            src={"file:///" + sanitizedUpscaledImagePath}
+            src={sanitizedUpscaledImagePath.startsWith("/") || sanitizedUpscaledImagePath.startsWith("http") ? sanitizedUpscaledImagePath : "file:///" + sanitizedUpscaledImagePath}
             alt={t("APP.SLIDER.UPSCAYLED_TITLE")}
             style={{
               objectFit: "contain",

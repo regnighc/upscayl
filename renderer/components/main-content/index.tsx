@@ -73,7 +73,10 @@ const MainContent = ({
   const [zoomAmount, setZoomAmount] = useState("100");
 
   const sanitizedUpscaledImagePath = useMemo(
-    () => sanitizePath(upscaledImagePath),
+    () =>
+      upscaledImagePath.startsWith("/") || upscaledImagePath.startsWith("http")
+        ? upscaledImagePath
+        : sanitizePath(upscaledImagePath),
     [upscaledImagePath],
   );
 
@@ -117,7 +120,10 @@ const MainContent = ({
   };
 
   const sanitizedImagePath = useMemo(
-    () => sanitizePath(imagePath),
+    () =>
+      imagePath.startsWith("/") || imagePath.startsWith("http")
+        ? imagePath
+        : sanitizePath(imagePath),
     [imagePath],
   );
 

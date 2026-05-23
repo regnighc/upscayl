@@ -90,12 +90,15 @@ const LensViewer = ({
     });
   };
 
+  const toSrc = (p: string) =>
+    p.startsWith("/") || p.startsWith("http") ? p : "file:///" + p;
+
   const originalImage = useMemo(
-    () => "file:///" + sanitizedImagePath,
+    () => toSrc(sanitizedImagePath),
     [sanitizedImagePath],
   );
   const upscaledImage = useMemo(
-    () => "file:///" + sanitizedUpscaledImagePath,
+    () => toSrc(sanitizedUpscaledImagePath),
     [sanitizedUpscaledImagePath],
   );
 
